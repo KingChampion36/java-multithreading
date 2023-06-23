@@ -1,0 +1,8 @@
+/.idea
+/out
+/target
+
+# MAC stuff
+.DS_Store
+
+*.iml
