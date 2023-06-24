@@ -1,6 +1,4 @@
-# Thread Coordination
-
-## Thread Termination
+# Thread Termination
 
 Thread termination can be performed by using `Thread.interrupt()` method or by using **Daemon threads**.
 
@@ -84,3 +82,93 @@ public class Main {
 
 - If the method does not respond to the interrupt signal by throwing the `InterruptedException`, we need to check for that signal and handle it ourselves.
 - To prevent a thread from blocking our app from exiting, we set the thread to be a Daemon thread.
+
+# Thread Coordination - Why do we need it?
+
+- Different threads run independently.
+- Order of execution is out of our control.
+
+Let's say we have two threads A and B.
+
+### Thread Coordination - Scenario 1
+
+Thread A finishes completely before thread B.
+
+```mermaid
+flowchart LR
+  A[Thread A] --> B[Thread B]
+```
+
+### Thread Coordination - Scenario 2
+
+Thread B finishes completely before thread A.
+
+```mermaid
+flowchart LR
+  B[Thread B] --> A[Thread A]
+```
+
+### Thread Coordination - Scenario 3
+
+We may end up them running concurrently. [They are on same CPU core]
+
+```mermaid
+flowchart LR
+  B[Thread B] --> A[Thread A] --> C[Thread B]
+```
+
+### Thread Coordination - Scenario 4
+
+We may end up them running concurrently. [They are on different CPU core]
+
+
+## Thread Coordination - Dependency
+
+### What if one thread depends on another thread?
+
+```mermaid
+flowchart LR
+  A[Thread A] --Output/Input--> B[Thread B]
+```
+
+#### Naive Solution
+
+Thread B runs in a loop and keeps checking if Thread A's result is ready
+
+```java
+void waitForThreadA() {
+  while (!threadA.isFinished()) {
+    // burn CPU cycles
+  }
+}
+```
+
+This solution will work but Thread B's effort to check if thread A has finished its work is counter-productive in this case.
+
+#### Desired Solution
+
+Thread B checks and goes to sleep and when it wakes up it sees that Thread A has already finished its work.
+
+One of the tools to achieve this is by using `Thread.join()`
+
+```java
+public final void join();
+
+public final void join(long millis, int nanos);
+
+public final void join(long millis);
+```
+
+### Thread Coordination - Thread.join(..)
+
+- More control over independent threads.
+- Safely collect and aggregate results.
+- Gracefully handle runaway threads using `Thread.join(timeout)`
+
+## Summary - Thread Coordination
+
+- Do not rely on the order of execution
+- Always use thread coordination
+- Design code for worst case scenario
+- Threads may take unreasonably long time
+- Always use the `Thread.join(..)` with a time limit
