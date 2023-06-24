@@ -48,7 +48,6 @@ public class ThreadCreation1 {
     misbehavingThread.start();
 
     // Don't execute the thread until the given time passes
-    // During this time, thread doesn't consume any memory
     // This line stops the main thread for 10 seconds
     Thread.sleep(10000);
   }
