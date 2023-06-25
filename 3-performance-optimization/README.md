@@ -46,7 +46,7 @@ In general, we are concerned about two important performance metrics:
 - **Latency**: The time to completion of a task. Measured in time units.
 - **Throughput**: The amount of tasks completed in a given period. Measured in tasks/time unit.
 
-They are completely different metrics and improving one may have absolutely no impact on the another.
+They are completely different metrics and improving one may have absolutely no impact on the other.
 
 ## How can we improve Latency using multithreading
 
@@ -94,7 +94,7 @@ flowchart LR
 
 - Number of threads = Number of cores is optimal only if all threads are runnable and can run without interruption (no I/O blocking calls / sleep etc).
 - The assumption is nothing else is running that consumes a lot of CPU.
-- **Hyperthreading (Virtual Cores Vs Physical Cores)**: Most computers today use hyperthreading. Some hardware units are duplicated inside a single thread so that two separate threads can run in parallel. Some hardware units are shared.
+- **Hyperthreading (Virtual Cores Vs Physical Cores)**: Most computers today use hyperthreading. Some hardware units are duplicated inside a single core so that two separate threads can run in parallel. Some hardware units are shared.
 
 ### 2. Does breaking original task and aggregating results come for free? (Inherent cost of parallelization and Aggregation)
 
