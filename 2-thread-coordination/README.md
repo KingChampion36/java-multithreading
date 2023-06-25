@@ -119,7 +119,7 @@ flowchart LR
 
 ### Thread Coordination - Scenario 4
 
-We may end up them running concurrently. [They are on different CPU core]
+We may end up them running parallely. [They are on different CPU core]
 
 
 ## Thread Coordination - Dependency
