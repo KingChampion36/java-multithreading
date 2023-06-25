@@ -12,3 +12,11 @@ A pixel is represented in `ARGB`.
 - B -> Blue
 
 Shades of gray is achieved by keeping R, G and B equal.
+
+Example here: [ImageProcessing.java](ImageProcessing.java)
+
+## Summary
+
+- We can get a speed up if we partition a problem into multiple sub-problems.
+- More threads than cores is counterproductive.
+- There is inherent cost for running an algorithm by multiple threads.
